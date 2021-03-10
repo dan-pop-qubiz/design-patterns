@@ -19,7 +19,6 @@ namespace DesignPatterns.Proxy
 
         private void viewEmployeesBtn_Click(object sender, EventArgs e)
         {
-            employeesListBox.Items.Clear();
 
             string username = usernameTextbox.Text;
             string password = passwordTextbox.Text;
@@ -28,12 +27,11 @@ namespace DesignPatterns.Proxy
 
             try
             {
-                List<string> employeeNames = _companyProxy.GetEmployees();
-                employeeNames.ForEach(name => employeesListBox.Items.Add(name));
+                PopulateEmployeesList();
 
             }catch(Exception ex)
             {
-                MessageBox.Show("Not authorized!");
+                MessageBox.Show("Not authorized!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -48,13 +46,25 @@ namespace DesignPatterns.Proxy
             {
                 string newEmployeeName = employeeNameTextbox.Text;
                 _companyProxy.AddEmployee(newEmployeeName);
+                
+                employeeNameTextbox.Clear();
+
+                PopulateEmployeesList();
 
                 MessageBox.Show(newEmployeeName + " added!");
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Not authorized!");
+                MessageBox.Show("Not authorized!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void PopulateEmployeesList()
+        {
+            employeesListBox.Items.Clear();
+            List<string> employeeNames = _companyProxy.GetEmployees();
+            employeeNames.ForEach(name => employeesListBox.Items.Add(name));
         }
     }
 }
