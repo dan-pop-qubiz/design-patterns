@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPatterns.ChainOfResponsibility
+﻿namespace DesignPatterns.ChainOfResponsibility
 {
     public class LoanExecutive : BankEmployee
     {

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DesignPatterns.Mediator
@@ -13,6 +8,8 @@ namespace DesignPatterns.Mediator
         public IRouter router;
         public AbstractClient clientAna;
         public AbstractClient clientAndrei;
+        public AbstractClient clientAnca;
+        public AbstractClient clientAlin;
 
         public MediatorForm()
         {
@@ -22,30 +19,18 @@ namespace DesignPatterns.Mediator
         private void MediatorForm_Load(object sender, EventArgs e)
         {
             router = new Router();
-            clientAna = new Client
-            {
-                Name = "Ana",
-                Router = router
-            };
-            clientAna.MessageReceived += ClientReceivedMessage;
 
-            clientAndrei = new Client
-            {
-                Name = "Andrei",
-                Router = router
-            };
-            clientAndrei.MessageReceived += ClientReceivedMessage;
-
-            router.AddClient(clientAna);
-            router.AddClient(clientAndrei);
+            clientAna = CreateClient("Ana", new string[3] { "Andrei", "Anca", "Alin" });
+            clientAndrei = CreateClient("Andrei", new string[3] { "Ana", "Anca", "Alin" });
+            clientAnca = CreateClient("Anca", new string[3] { "Ana", "Andrei", "Alin" });
+            clientAlin = CreateClient("Alin", new string[3] { "Ana", "Andrei", "Anca" });
         }
 
         private void ClientReceivedMessage(object sender, MessageReceivedEventArgs e)
         {
-            string receiverName = e.Receiver.Name;
-            string line = e.Message + Environment.NewLine;
+            string line = e.SenderName + ": " + e.Message + Environment.NewLine;
 
-            switch (receiverName)
+            switch (e.ReceiverName)
             {
                 case "Ana":
                     textBoxReceiveAna.AppendText(line);
@@ -53,25 +38,87 @@ namespace DesignPatterns.Mediator
                 case "Andrei":
                     textBoxReceiveAndrei.AppendText(line);
                     break;
+                case "Anca":
+                    textBoxReceiveAnca.AppendText(line);
+                    break;
+                case "Alin":
+                    textBoxReceiveAlin.AppendText(line);
+                    break;
             }
         }
 
         private void buttonSendAna_Click(object sender, EventArgs e)
         {
-            string text = textBoxSendAna.Text;
-
-            clientAna.Send(text);
-
-            textBoxSendAna.Clear();
+            if (comboBoxAnaSendTo.SelectedIndex > -1 && textBoxSendAna.TextLength > 0)
+            {
+                clientAna.Send(comboBoxAnaSendTo.Text, textBoxSendAna.Text);
+                textBoxSendAna.Clear();
+                comboBoxAnaSendTo.SelectedIndex = -1;
+                comboBoxAnaSendTo.SelectedText = "Send to";
+            }
         }
 
         private void buttonSendAndrei_Click(object sender, EventArgs e)
         {
-            string text = textBoxSendAndrei.Text;
-
-            clientAndrei.Send(text);
-
-            textBoxSendAndrei.Clear();
+            if (comboBoxAndreiSendTo.SelectedIndex > -1 && textBoxSendAndrei.TextLength > 0)
+            {
+                clientAndrei.Send(comboBoxAndreiSendTo.Text, textBoxSendAndrei.Text);
+                textBoxSendAndrei.Clear();
+                comboBoxAndreiSendTo.SelectedIndex = -1;
+                comboBoxAndreiSendTo.SelectedText = "Send to";
+            }
         }
+
+        private void buttonSendAnca_Click(object sender, EventArgs e)
+        {
+            if (comboBoxAncaSendTo.SelectedIndex > -1 && textBoxSendAnca.TextLength > 0)
+            {
+                clientAnca.Send(comboBoxAncaSendTo.Text, textBoxSendAnca.Text);
+                textBoxSendAnca.Clear();
+                comboBoxAncaSendTo.SelectedIndex = -1;
+                comboBoxAncaSendTo.SelectedText = "Send to";
+            }
+        }
+        private void buttonSendAlin_Click(object sender, EventArgs e)
+        {
+            if (comboBoxAlinSendTo.SelectedIndex > -1 && textBoxSendAlin.TextLength > 0)
+            {
+                clientAlin.Send(comboBoxAlinSendTo.Text, textBoxSendAlin.Text);
+                textBoxSendAndrei.Clear();
+                comboBoxAlinSendTo.SelectedIndex = -1;
+                comboBoxAlinSendTo.SelectedText = "Send to";
+            }
+        }
+
+        private AbstractClient CreateClient(string name, string[] friendsList)
+        {
+            AbstractClient client = new Client
+            {
+                Name = name,
+                Router = router
+            };
+
+            client.MessageReceived += ClientReceivedMessage;
+            router.AddClient(client);
+
+            switch (name)
+            {
+                case "Ana":
+                    comboBoxAnaSendTo.Items.AddRange(friendsList);
+                    break;
+                case "Andrei":
+                    comboBoxAndreiSendTo.Items.AddRange(friendsList);
+                    break;
+                case "Anca":
+                    comboBoxAncaSendTo.Items.AddRange(friendsList);
+                    break;
+                case "Alin":
+                    comboBoxAlinSendTo.Items.AddRange(friendsList);
+                    break;
+            }
+
+            return client;
+        }
+
     }
 }

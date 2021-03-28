@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPatterns.Mediator
+﻿namespace DesignPatterns.Mediator
 {
     public class Client : AbstractClient
     {
-        public override void Receive(string message)
+        public override void Receive(string fromName, string message)
         {
-            MessageReceivedEventArgs args = new MessageReceivedEventArgs { Message = message, Receiver = this };
+            MessageReceivedEventArgs args = new MessageReceivedEventArgs { SenderName = fromName, ReceiverName = Name, Message = message };
             OnMessageReceived(args);
-            
         }
 
-        public override void Send(string message)
+        public override void Send(string toName, string message)
         {
-            Router.SendMessage(this, message);
+            Router.SendMessage(Name, toName, message);
         }
     }
 }

@@ -29,57 +29,78 @@ namespace DesignPatterns.Singleton
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.numberOfDocumentsTextbox = new System.Windows.Forms.TextBox();
-            this.printBtn = new System.Windows.Forms.Button();
             this.singletonFlowResult = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxNumberOfUsers = new System.Windows.Forms.TextBox();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxMaxDocuments = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Number of documents";
-            // 
-            // numberOfDocumentsTextbox
-            // 
-            this.numberOfDocumentsTextbox.Location = new System.Drawing.Point(172, 31);
-            this.numberOfDocumentsTextbox.Name = "numberOfDocumentsTextbox";
-            this.numberOfDocumentsTextbox.Size = new System.Drawing.Size(111, 23);
-            this.numberOfDocumentsTextbox.TabIndex = 1;
-            this.numberOfDocumentsTextbox.Text = "5";
-            // 
-            // printBtn
-            // 
-            this.printBtn.Location = new System.Drawing.Point(38, 74);
-            this.printBtn.Name = "printBtn";
-            this.printBtn.Size = new System.Drawing.Size(75, 23);
-            this.printBtn.TabIndex = 2;
-            this.printBtn.Text = "Print";
-            this.printBtn.UseVisualStyleBackColor = true;
-            this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
             // 
             // singletonFlowResult
             // 
-            this.singletonFlowResult.Location = new System.Drawing.Point(38, 133);
+            this.singletonFlowResult.Location = new System.Drawing.Point(12, 156);
             this.singletonFlowResult.Multiline = true;
             this.singletonFlowResult.Name = "singletonFlowResult";
             this.singletonFlowResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.singletonFlowResult.Size = new System.Drawing.Size(672, 226);
+            this.singletonFlowResult.Size = new System.Drawing.Size(672, 403);
             this.singletonFlowResult.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(38, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 15);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Number of users";
+            // 
+            // textBoxNumberOfUsers
+            // 
+            this.textBoxNumberOfUsers.Location = new System.Drawing.Point(246, 28);
+            this.textBoxNumberOfUsers.Name = "textBoxNumberOfUsers";
+            this.textBoxNumberOfUsers.Size = new System.Drawing.Size(102, 23);
+            this.textBoxNumberOfUsers.TabIndex = 5;
+            this.textBoxNumberOfUsers.Text = "5";
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(38, 116);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 6;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(38, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(197, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Max number of documents per user";
+            // 
+            // textBoxMaxDocuments
+            // 
+            this.textBoxMaxDocuments.Location = new System.Drawing.Point(246, 70);
+            this.textBoxMaxDocuments.Name = "textBoxMaxDocuments";
+            this.textBoxMaxDocuments.Size = new System.Drawing.Size(100, 23);
+            this.textBoxMaxDocuments.TabIndex = 8;
+            this.textBoxMaxDocuments.Text = "10";
             // 
             // SingletonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 665);
+            this.Controls.Add(this.textBoxMaxDocuments);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.buttonStart);
+            this.Controls.Add(this.textBoxNumberOfUsers);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.singletonFlowResult);
-            this.Controls.Add(this.printBtn);
-            this.Controls.Add(this.numberOfDocumentsTextbox);
-            this.Controls.Add(this.label1);
             this.Name = "SingletonForm";
             this.Text = "SingletonForm";
             this.ResumeLayout(false);
@@ -88,10 +109,11 @@ namespace DesignPatterns.Singleton
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox numberOfDocumentsTextbox;
-        private System.Windows.Forms.Button printBtn;
         private System.Windows.Forms.TextBox singletonFlowResult;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxNumberOfUsers;
+        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxMaxDocuments;
     }
 }

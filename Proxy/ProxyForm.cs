@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DesignPatterns.Proxy
@@ -19,7 +15,6 @@ namespace DesignPatterns.Proxy
 
         private void viewEmployeesBtn_Click(object sender, EventArgs e)
         {
-
             string username = usernameTextbox.Text;
             string password = passwordTextbox.Text;
 
@@ -29,7 +24,7 @@ namespace DesignPatterns.Proxy
             {
                 PopulateEmployeesList();
 
-            }catch(Exception ex)
+            }catch
             {
                 MessageBox.Show("Not authorized!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -54,7 +49,7 @@ namespace DesignPatterns.Proxy
                 MessageBox.Show(newEmployeeName + " added!");
                 
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Not authorized!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

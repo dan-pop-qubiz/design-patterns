@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DesignPatterns.Mediator
 {
@@ -11,19 +9,19 @@ namespace DesignPatterns.Mediator
         public IRouter Router { get; set; }
         public string Name { get; set; }
 
-        public abstract void Send(string message);
-        public abstract void Receive(string message);
+        public abstract void Send(string toName, string message);
+        public abstract void Receive(string fromName, string message);
 
         public void OnMessageReceived(MessageReceivedEventArgs args)
         {
             MessageReceived(this, args);
         }
-
     }
 
     public class MessageReceivedEventArgs: EventArgs
     {
-        public AbstractClient Receiver { get; set; }
+        public string ReceiverName { get; set; }
+        public string SenderName { get; set; }
         public string Message { get; set; }
     }
 }

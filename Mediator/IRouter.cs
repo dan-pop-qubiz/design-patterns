@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPatterns.Mediator
+﻿namespace DesignPatterns.Mediator
 {
     public interface IRouter
     {
-        void SendMessage(AbstractClient from, string message);
+        void SendMessage(string senderName, string receiverName, string message);
 
         void AddClient(AbstractClient client);
     }

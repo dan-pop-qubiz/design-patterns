@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DesignPatterns.Singleton
 {
     public sealed class Printer
     {
         private static Printer _instance = null;
-        private Queue<string> _queue = new Queue<string>();
-        private static string _instanceName;
+        private Queue<Document> _queue = new Queue<Document>();
         private static readonly object _lock = new object();
+        private static int DocumentsPrinted = 0;
 
         private Printer() { }
 
-        public static Printer GetInstance(string instanceName)
+        public static Printer GetInstance()
         {
             if (_instance == null)
             {
@@ -21,7 +19,6 @@ namespace DesignPatterns.Singleton
                 {
                     if (_instance == null)
                     {
-                        _instanceName = instanceName;
                         _instance = new Printer();
                     }
                 }
@@ -30,21 +27,28 @@ namespace DesignPatterns.Singleton
             return _instance;
         }
 
-        public string GetInstanceName()
+        public void AddDocument(Document document)
         {
-            return _instanceName;
+            _queue.Enqueue(document);
         }
 
-        public void AddDocument(string documentName)
+        public void PrintDocument()
         {
-            _queue.Enqueue(documentName);
+            lock (_lock)
+            {
+                Document documentPrinted = _queue.Dequeue();
+                DocumentsPrinted++;
+            }
         }
 
-        public string PrintDocument()
+        public int GetDocumentsPrinted()
         {
-            string documentPrinted = _queue.Dequeue();
-            return documentPrinted;
+            return DocumentsPrinted;
         }
 
+        public void ResetDocumentsPrintedCount()
+        {
+            DocumentsPrinted = 0;
+        }
     }
 }

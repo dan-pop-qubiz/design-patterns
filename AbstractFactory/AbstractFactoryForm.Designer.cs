@@ -188,7 +188,6 @@ namespace DesignPatterns.AbstractFactory
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AbstractFactoryForm";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.AbstractFactoryForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();

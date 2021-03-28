@@ -13,16 +13,19 @@ namespace DesignPatterns.Mediator
             clients.Add(client);
         }
 
-        public void SendMessage(AbstractClient from, string message)
+        public void SendMessage(string senderName, string receiverName, string message)
         {
-            foreach(AbstractClient client in clients)
+            AbstractClient receiver = GetClientByName(receiverName);
+
+            if (receiver != null)
             {
-                if (client.Name != from.Name)
-                {
-                    string receivedMessage = from.Name + ": " + message;
-                    client.Receive(receivedMessage);
-                }
+                receiver.Receive(senderName, message);
             }
+        }
+
+        private AbstractClient GetClientByName(string name)
+        {
+            return clients.Find(item => item.Name == name);
         }
     }
 }

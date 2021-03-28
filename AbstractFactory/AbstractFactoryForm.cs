@@ -1,10 +1,5 @@
 ﻿using DesignPatterns.AbstractFactory.Vehicles;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DesignPatterns.AbstractFactory
@@ -24,11 +19,6 @@ namespace DesignPatterns.AbstractFactory
             };
 
             InitializeComponent();
-        }
-
-        private void AbstractFactoryForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
